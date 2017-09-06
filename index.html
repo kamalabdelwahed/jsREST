@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://google-fonts.azurewebsites.net/ -->
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <link href="css/api.css" rel="stylesheet"/>
+    <title>XMLHttpRequest Example</title>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var url = "http://10.100.100.58:5000/response.json";
+
+        function submitForm(){
+        $.ajax({url: url}).then(resultData)
+        }
+
+        function resultData(result){
+            var textVal = $('#searchBox1').val();
+            alert("The text box value is: " +textVal);
+
+            var group2 = $('#group2');
+            group2.innerHTML="";
+
+            result.forEach(function(e, i, a){
+                var h2 = $("<h2></h2>").text("Full Name: "+e.full_name);
+                group2.append(h2);
+
+                var p = $("<p></p>").text("SSH Url: "+e.ssh_url);
+                group2.append(p);
+
+                var p1 = $("<p></p>").text("Language: "+e.language);
+                group2.append(p1);
+
+                var p2 = $("<p></p>").text("Last Push: "+e.pushed_at);
+                group2.append(p2);
+            })
+        }
+
+    </script>
+</head>
+
+<body>
+
+<div id="container">
+    <div id="header">
+        <p>Enter the name of a Github orginization here, and we'll retrieve a list of the repos:
+        </p>
+    </div>
+
+    <div id="group1">
+        <input type="text" id="searchBox1" placeholder="CardinalNow" />
+        <button type="submit" value="Submit"  onclick="submitForm()">Submit</button>
+    </div>
+
+    <div id="group2">
+
+    </div>
+
+
+    <div id="footer"><img style="float:left; padding: 15px 0 0 20px" src="img/cardinal-logo.png" alt=""/>
+    </div>
+</div>
+
+</body>
